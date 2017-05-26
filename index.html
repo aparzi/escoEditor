@@ -14,20 +14,34 @@
 <body>
 
   <div id="container"></div>
-
+  <div>
+    <button onclick="save()">Salva</button>
+  </div>
   <script>
 $(function() {
   $('#container').jstree({
     'core' : {
       'data' : {
         "url" : "https://www.angeloparziale.it/serviziEditor/index.php/getOccupations",
-        "dataType" : "json" // needed only if you do not supply JSON headers
+        "dataType" : "json",
+        success : function(json) {
+
+        },
+        error : function(xhr, ajaxOptions, thrownError) {
+            alert('Chiamata fallita riprovare!')
+        }
       },
       "check_callback" : true, // enable all modifications
     },
     "plugins" : ["dnd","contextmenu"]
   });
 });
+
+function save () {
+  var v =$('#container').jstree(false).get_json();
+   var mytext = JSON.stringify(v);
+   alert(mytext)
+}
 </script>
 </body>
 
