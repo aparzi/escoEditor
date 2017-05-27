@@ -22,11 +22,17 @@ $(function() {
   $('#container').jstree({
     'core' : {
       'data' : {
-        "url" : "https://www.angeloparziale.it/serviziEditor/index.php/getOccupations",
+        "url" : "http://oldhand.datasounds.io/api/occupations/hierarchy",
         "dataType" : "json",
-        success : function(json) {
 
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("X-oldhand-auth", "fc6add639e80f76e047f642fe6952168");
         },
+
+        success : function(json) {
+          
+        },
+
         error : function(xhr, ajaxOptions, thrownError) {
             alert('Chiamata fallita riprovare!')
         }
@@ -38,7 +44,7 @@ $(function() {
 });
 
 function save () {
-  var v =$('#container').jstree(false).get_json();
+  var v =$('#container').jstree(false ).get_json();
    var mytext = JSON.stringify(v);
    alert(mytext)
 }
